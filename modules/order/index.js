@@ -21,7 +21,7 @@ Router.post('/createOrder', (req, res) => {
 	orderController.createOrder(orderInfo, (err, data) => {
 		if (err) res.json(utils.genRes(false, null, err));
 		else {
-			tableController.updateTable(req.body.tableIds, data, 1, (err, data) => {
+			tableController.updateTable(req.body.tableIds, data, 1, (err, data1) => {
 				if (err) res.json(utils.genRes(false, null, err));
 				else res.json(utils.genRes(true, data));
 			});

@@ -5,7 +5,8 @@ var updateTable = (tableIds, orderId, status, cb) => {
 	tableIds.forEach(ids => {
 		updates[`/table/${ids}`] =  {
 			status: status,
-			orderId: orderId
+			orderId: orderId,
+			name: ids
 		};
 	});
 	firebase.database().ref().update(updates);
