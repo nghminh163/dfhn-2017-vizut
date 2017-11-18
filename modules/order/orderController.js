@@ -12,4 +12,13 @@ var createOrder = (obj, cb)=> {
 	}).key);
 }
 
-module.exports = {createOrder};
+var deleteOrder = (orderId)=>{
+	firebase.database().ref(`order/${orderId}`).remove();
+	firebase.database().ref('table').orderByChild("orderId").equalTo(orderId).on("child_added", function(snapshot) {
+		let child = snapshot.key;
+		firebase.database().ref(`test/${child}/orderId`).remove(); 
+		firebase.database().ref(`test/${child}`).set({status: 0}); 
+	  });
+}
+
+module.exports = {createOrder, deleleOrder};
