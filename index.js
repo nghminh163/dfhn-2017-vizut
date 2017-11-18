@@ -2,12 +2,9 @@ const express = require('express');
 const CONFIGS = require('./config.js');
 const user = require('./modules/user');
 const bodyParser = require('body-parser');
-const admin = require("firebase-admin");
 const session = require('express-session');
 
 var app = express();
-
-var serviceAccount = require("./dfhn-vizut-firebase-adminsdk-7b9v6-6b7890226b.json");
 
 app.use(session({
 	secret: "thisisalongsecretkey",
@@ -16,10 +13,6 @@ app.use(session({
 	saveUninitialized: true
 }));
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://dfhn-vizut.firebaseio.com"
-});
 
 app.use(bodyParser.json({extended : true}));
 app.use(bodyParser.urlencoded({extended: true}));

@@ -14,5 +14,7 @@ Router.post('/createOrder', (req, res) => {
 });
 
 Router.post('/deleteOrder', (req, res) => {
-	
+
 });
+
+module.exports = Router;
