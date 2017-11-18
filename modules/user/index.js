@@ -7,11 +7,15 @@ const userController = require('./userController.js');
 Router.post("/login", (req, res) => {
 	var email = req.body.email;
 	var password = req.body.password;
-	res.send("Ok");
+	res.json({
+		role: "user",
+		id: "123",
+		name: "Test"
+	});
 });
 
 Router.get("/userInfo", (req, res) => {
-
+	
 });
 
 
