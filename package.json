@@ -16,7 +16,9 @@
   "license": "ISC",
   "homepage": "https://bitbucket.org/gdghanoi/dfhn-2017-vizut#readme",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "express": "^4.16.2",
+    "md5": "^2.2.1",
     "nodemon": "^1.12.1"
   }
 }
