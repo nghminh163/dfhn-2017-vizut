@@ -7,6 +7,8 @@ const payment = require('./modules/payment');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const firebase = require('firebase-admin');
+const admin = require('./modules/admin');
+
 var serviceAccount = require("./dfhn-vizut-firebase-adminsdk-7b9v6-6b7890226b.json");
 
 firebase.initializeApp({
@@ -48,6 +50,8 @@ app.use("/api/user", user);
 app.use("/api/order", order);
 
 app.use("/api/payment", payment);
+
+app.use("/api/admin", admin);
 
 // app.use("/api/table", table);
 
