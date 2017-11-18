@@ -3,10 +3,10 @@ const CONFIGS = require('./config.js');
 const user = require('./modules/user');
 const order = require('./modules/order');
 const table = require('./modules/table');
+const payment = require('./modules/payment');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const firebase = require('firebase-admin');
-
 var serviceAccount = require("./dfhn-vizut-firebase-adminsdk-7b9v6-6b7890226b.json");
 
 firebase.initializeApp({
@@ -46,6 +46,8 @@ app.use("/", express.static(__dirname + "/public/dist"));
 app.use("/api/user", user);
 
 app.use("/api/order", order);
+
+app.use("/api/payment", payment);
 
 // app.use("/api/table", table);
 

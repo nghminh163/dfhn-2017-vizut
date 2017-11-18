@@ -51,7 +51,7 @@ var editOrder = (obj, cb)=> {
 			updated[`table/${id}/status`] = 1;
 		});
 		updated[`order/${obj.orderId}/tableIds`] = obj.tableIds;
-		firebase.database().ref('order/'+obj.orderId+'/tableIds').once('value').then(res=>{
+		firebase.database().ref(`order/${obj.orderId}/tableIds`).once('value').then(res=>{
 			var tblIds=res.val();
 			let updated2 = {};
 			tblIds.forEach(id => {
