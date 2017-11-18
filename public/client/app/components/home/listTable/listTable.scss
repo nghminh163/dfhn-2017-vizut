@@ -1,0 +1,23 @@
+.list-table-wrapper {
+  .tool-filter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .order-list {
+      display: flex;
+      flex-direction: row;
+    }
+  }
+  .item-table {
+    background: #eeeeee;
+    padding: 15px;
+    cursor: pointer;
+    margin-bottom: 20px;
+
+    .status-icon {
+      font-size: 48px;
+      text-align: center;
+    }
+  }
+}

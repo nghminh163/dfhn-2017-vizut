@@ -29,7 +29,7 @@ app.use(function (req, res, next) {
     // Pass to next layer of middleware
     next();
 });
-app.use("/", express.static(__dirname + "/public"));
+app.use("/", express.static(__dirname + "/public/dist"));
 
 app.use(user);
 
