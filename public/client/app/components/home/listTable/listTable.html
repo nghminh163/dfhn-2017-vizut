@@ -1,7 +1,9 @@
 <div class="list-table-wrapper">
     <div class="tool-filter ">
         <h1>{{ $ctrl.name }}</h1>
-        <button class="btn btn-primary" ng-if="$ctrl.selectedTable.length > 0" ng-click="$ctrl.continueToOrder()">Tiếp tục đặt bàn</button>
+        <div>
+            <button class="btn btn-primary" ng-if="$ctrl.selectedTable.length == 0" ng-click="$ctrl.continueToOrder()">Tiếp tục đặt bàn</button>
+        </div>
         <div class="order-list">
             <label for="filter-form">Xem theo:</label>
             <select id="filter-form" class="form-control" ng-model="$ctrl.filter">

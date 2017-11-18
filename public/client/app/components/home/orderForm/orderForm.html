@@ -1,26 +1,80 @@
-<div>
-    <h1>{{ $ctrl.name }}</h1>
-    <button class="btn-primary btn" ng-click="$ctrl.backToList()">Back</button>
-
-    <div class="">
-        <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-        </div>
-        <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-        </div>
-        <div class="form-group">
-            <label for="exampleInputFile">File input</label>
-            <input type="file" id="exampleInputFile">
-            <p class="help-block">Example block-level help text here.</p>
-        </div>
-        <div class="checkbox">
-            <label>
-                <input type="checkbox"> Check me out
-            </label>
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
+<div class="order-form-wrapper">
+    <div class="tool-action">
+        <h1>{{ $ctrl.name }}</h1>
+        <button class="btn-primary btn" ng-click="$ctrl.backToList()">Back</button>
     </div>
+
+    <div class="section-form">
+        <div class="title">Chọn thời gian</div>
+        <div class="form-group">
+            <label for="date">Chọn ngày</label>
+            <p class="input-group">
+
+                <input type="text" class="form-control" uib-datepicker-popup="{{$ctrl.format}}" id="date"
+                       ng-model="$ctrl.formData.date" is-open="$ctrl.isOpenDate" datepicker-options="$ctrl.dateOptions"
+                       ng-required="true" close-text="Close" alt-input-formats="altInputFormats"/>
+                <span class="input-group-btn">
+                <button style="height: 34px;" type="button" class="btn btn-default" ng-click="$ctrl.openDatePicker()">
+                    <i class="glyphicon glyphicon-calendar"></i>
+                </button>
+            </span>
+            </p>
+        </div>
+
+        <div class="input-group time-form">
+            <label>Chọn thời gian</label>
+            <div uib-timepicker ng-model="$ctrl.formData.time" ng-change="changed()" hour-step="$ctrl.timeDefault.hstep" minute-step="$ctrl.timeDefault.mstep" show-meridian="$ctrl.timeDefault.ismeridian"></div>
+        </div>
+
+        <pre ng-if="$ctrl.formData.date || $ctrl.formData.time" class="alert alert-info">Bạn đã chọn: {{$ctrl.formData.date | date:'MM/dd/yyyy'}} {{$ctrl.formData.time | date:'shortTime' }}</pre>
+    </div>
+
+    <div class="section-form">
+        <div class="title">Thông tin cá nhân</div>
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" placeholder="Your name" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label for="Email">Email</label>
+                <input type="email" class="form-control" id="Email" placeholder="Your Email" required>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label for="number">Phone Number</label>
+                <input type="text" class="form-control" id="number" placeholder="Your Phone Number" required>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-form">
+        <div class="title">Thông tin thanh toán</div>
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label for="Card No">Card No</label>
+                <input type="text" class="form-control" id="Card No" placeholder="Card No" required>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-8">
+                <label for="Expire">Expire</label>
+                <input type="date" class="form-control" id="Expire" placeholder="Expire" required>
+            </div>
+
+            <div class="form-group col-md-4">
+                <label for="CCV">CCV</label>
+                <input type="text" class="form-control" id="CCV" placeholder="CCV" required>
+            </div>
+        </div>
+
+    </div>
+
+    <button type="button" class="btn btn-primary btn-lg btn-block">PAYNOW</button>
+
 </div>

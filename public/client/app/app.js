@@ -19,7 +19,6 @@ import 'ngbootbox';
 import 'moment/moment.js';
 import 'angular-bootstrap-lightbox/dist/angular-bootstrap-lightbox.min';
 
-
 import appSerivce from './app.service';
 
 angular.module('app', [

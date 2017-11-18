@@ -1,0 +1,37 @@
+.order-form-wrapper {
+  border: 1px solid #eeeeee;
+
+  .row {
+    margin: 0 auto;
+  }
+  .tool-action {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .date-form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .time-form {
+    flex-direction: column;
+    align-items: center;
+    display: flex;
+  }
+
+  .section-form {
+    padding: 20px 20px;
+    .title {
+      margin-bottom: 20px;
+      margin-left: -20px;
+      margin-right: -20px;
+      background: #eeeeee;
+      padding: 20px 0;
+      display: block;
+      text-align: center;
+    }
+  }
+}

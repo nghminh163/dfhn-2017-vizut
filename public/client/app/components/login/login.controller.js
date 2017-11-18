@@ -9,7 +9,7 @@ class LoginController {
         this.toastr = toastr;
         this.isLogin = true;
         this.formData = {
-            username: '',
+            email: '',
             password: ''
         };
         console.log(loginService);
@@ -18,21 +18,16 @@ class LoginController {
 
     loginForm() {
         this.toastr.success("Login thành công");
-        this.$rootScope.user = {
-            role: 'user',
-            name: 'Khanhkak'
-        };
-        this.$cookieStore.put('user', this.$rootScope.user);
-        this.$window.location.reload();
-        // this.loginService.login(this.formData, (res) => {
-        //
-        //     if(res.status) {
-        //         this.toastr.success("Login thành công");
-        //         this.$rootScope.user = res.result;
-        //         this.$cookieStore.put('user', this.$rootScope.user);
-        //         this.$window.location.reload();
-        //     }
-        // })
+        this.loginService.login(this.formData, (res) => {
+
+            if(res.status) {
+                console.log(res);
+                this.toastr.success("Login thành công");
+                this.$rootScope.user = res.result;
+                this.$cookieStore.put('user', this.$rootScope.user);
+                this.$window.location.reload();
+            }
+        })
     }
 }
 
