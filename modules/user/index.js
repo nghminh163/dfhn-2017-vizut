@@ -24,8 +24,8 @@ Router.post("/signup", (req, res) => {
 		phone: req.body.phone,
 		email: req.body.email
 	}, (err, data) => {
-		if (err) res.send(utils.genRes(false, null, err));
-		else res.send(utils.genRes(true));
+		if (err) res.json(utils.genRes(false, null, err));
+		else res.json(utils.genRes(true));
 	});
 });
 

@@ -1,4 +1,4 @@
-var updateTable = (tableIds, orderId, status) => {
+var updateTable = (tableIds, orderId, status, cb) => {
 	let postData = {};
 
 	tableIds.forEach(ids => {
@@ -11,6 +11,7 @@ var updateTable = (tableIds, orderId, status) => {
 	var updates = {};
 	updates['/table'] = postData;
 	firebase.database().ref().update(updates);
+	cb(null);
 }
 	
 module.exports={table}

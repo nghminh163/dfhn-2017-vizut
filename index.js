@@ -5,6 +5,14 @@ const order = require('./modules/order');
 const table = require('./modules/table');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const firebase = require('firebase-admin');
+
+var serviceAccount = require("./dfhn-vizut-firebase-adminsdk-7b9v6-6b7890226b.json");
+
+firebase.initializeApp({
+  credential: firebase.credential.cert(serviceAccount),
+  databaseURL: "https://dfhn-vizut.firebaseio.com"
+});
 
 var app = express();
 

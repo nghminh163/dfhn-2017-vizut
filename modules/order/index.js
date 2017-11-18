@@ -2,6 +2,8 @@ const express = require('express');
 const Router = express.Router();
 const bodyParser = require('body-parser');
 const orderController = require('./orderController.js');
+const tableController = require('../table');
+const async = require('async');
 const utils = require('../utils');
 
 Router.post('/createOrder', (req, res) => {
@@ -18,14 +20,19 @@ Router.post('/createOrder', (req, res) => {
 
 	orderController.createOrder(orderInfo, (err, data) => {
 		if (err) res.json(utils.genRes(false, null, err));
-		else res.json(utils.genRes(true, data));
+		else {
+			tableController.updateTable(req.body.tableIds, data, 1, (err, data) => {
+				if (err) res.json(utils.genRes(false, null, err));
+				else res.json(utils.genRes(true, data));
+			});
+		}
 	});
 });
 
 Router.post('/deleteOrder', (req, res) => {
 	orderController.deleteOrder(req.body.orderId, (err, data) => {
-		if (err) res.json(false, null, err);
-		else res.json(true);
+		if (err) res.json(utils.genRes(false, null, err));
+		else res.json(utils.genRes(true));
 	});
 });
 
@@ -39,8 +46,8 @@ Router.post('/editOrder', (req, res) => {
 	}
 
 	orderController.editOrder(updateInfo, (err, data) => {
-		if (err) res.json(err);
-		else res.json(true);
+		if (err) res.json(utils.genRes(false, null, err));
+		else res.json(utils.genRes(true));
 	});
 });
 

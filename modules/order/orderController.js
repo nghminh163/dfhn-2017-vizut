@@ -23,8 +23,9 @@ var createOrder = (obj, cb)=> {
 
 var deleteOrder = (orderId, cb)=>{
 	firebase.database().ref(`order/${orderId}`).remove();
-	firebase.database().ref('table').orderByChild("orderId").equalTo(orderId).on("child_added", function(snapshot) {
-		let child = snapshot.key;
+	firebase.database().ref('table').orderByChild("orderId").equalTo(orderId).once("child_added").then(res=> {
+		console.log(res.key);
+		let child = res.key;
 		firebase.database().ref(`table/${child}/orderId`).remove(); 
 		firebase.database().ref(`table/${child}`).set({status: 0}); 
   });

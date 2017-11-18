@@ -1,19 +1,13 @@
 const md5 = require('md5');
 const firebase = require("firebase-admin");
 
-var serviceAccount = require("../../dfhn-vizut-firebase-adminsdk-7b9v6-6b7890226b.json");
-
-firebase.initializeApp({
-  credential: firebase.credential.cert(serviceAccount),
-  databaseURL: "https://dfhn-vizut.firebaseio.com"
-});
-
 var signUp = (obj, cb)=> {
 	var objs = {
 		name: obj.name,
 		password: md5(obj.password),
 		phone: obj.phone,
-		email: obj.email
+		email: obj.email,
+		role: "user"
 	}
 	firebase.database().ref('users').push(objs);
 	cb(null, objs);
