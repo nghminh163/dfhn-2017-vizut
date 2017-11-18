@@ -1,6 +1,8 @@
 const express = require('express');
 const CONFIGS = require('./config.js');
 const user = require('./modules/user');
+const order = require('./modules/order');
+const table = require('./modules/table');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 
@@ -34,6 +36,10 @@ app.use(function (req, res, next) {
 app.use("/", express.static(__dirname + "/public/dist"));
 
 app.use("/api/user", user);
+
+app.use("/api/order", order);
+
+// app.use("/api/table", table);
 
 app.get("/", (req, res) => {
 	res.send("It works!");

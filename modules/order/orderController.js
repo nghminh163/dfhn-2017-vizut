@@ -1,30 +1,47 @@
 //Thêm, sửa, xóa
 //idor, id users, idtable, description, price, person, time
+const firebase = require("firebase-admin");
+
+var serviceAccount = require("../../dfhn-vizut-firebase-adminsdk-7b9v6-6b7890226b.json");
+
+// firebase.initializeApp({
+//   credential: firebase.credential.cert(serviceAccount),
+//   databaseURL: "https://dfhn-vizut.firebaseio.com"
+// });
 
 var createOrder = (obj, cb)=> {
 	cb(null, firebase.database().ref('order').push({
-			userId: userId,
-			description: description,
-			price: price,
-			time: time,
-			tableIds:  tableIds,
+			userId: obj.userId,
+			description: obj.description,
+			price: obj.price,
+			time: obj.time,
+			tableIds:  obj.tableIds,
+			listing: obj.listing,
 			status: "pending"
-	}).key); 
+	}).key);
 }
 
-var deleteOrder = (orderId)=>{
+var deleteOrder = (orderId, cb)=>{
 	firebase.database().ref(`order/${orderId}`).remove();
 	firebase.database().ref('table').orderByChild("orderId").equalTo(orderId).on("child_added", function(snapshot) {
 		let child = snapshot.key;
 		firebase.database().ref(`table/${child}/orderId`).remove(); 
 		firebase.database().ref(`table/${child}`).set({status: 0}); 
-	  });
+  });
+	cb(null);
 }
 
-var editOrder = (orderId, description,price,tableIds)=> {
-if(description){firebase.database().ref(`order/${orderId}/description`).set({description: description})}
-if(price){firebase.database().ref(`order/${orderId}/price`).set({price: price})}
-if(tableIds){firebase.database().ref(`order/${orderId}/tableIds`).set({tableIds: tableIds})}
+var editOrder = (obj, cb)=> {
+	var updated = {
+	}
+
+	if(obj.description)	updated.description = obj.description;
+	if(obj.price)	updated.price = obj.price;
+	if(obj.tableIds) updated.tableIds = obj.tableIds;
+	if(obj.listing) updated.listing = obj.listing;	
+
+	firebase.database().ref(`order/${obj.orderId}`).update(updated);
+	cb(null);
 }
 
-module.exports = {createOrder, deleleOrder};
+module.exports = {createOrder, deleteOrder, editOrder};
