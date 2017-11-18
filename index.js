@@ -16,6 +16,7 @@ app.use(session({
 
 app.use(bodyParser.json({extended : true}));
 app.use(bodyParser.urlencoded({extended: true}));
+
 app.use(function (req, res, next) {
     // Website you wish to allow to connect
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -29,9 +30,10 @@ app.use(function (req, res, next) {
     // Pass to next layer of middleware
     next();
 });
+
 app.use("/", express.static(__dirname + "/public/dist"));
 
-app.use(user);
+app.use("/api/user", user);
 
 app.get("/", (req, res) => {
 	res.send("It works!");

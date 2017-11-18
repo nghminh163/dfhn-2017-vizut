@@ -7,14 +7,13 @@ const utils = require('../utils');
 Router.post("/login", (req, res) => {
 	var email = req.body.email;
 	var password = req.body.password;
+	console.log(email, password);
 	userController.signIn(email, password, (err, userInfo)  => {
-		if (err) {
-			res.json(utils.genRes(false, null, err));
-			return;
-		}	
-		res.json(utils.genRes(true, userInfo));
+		if (err)
+			return res.json(utils.genRes(false, null, err));
 		req.session.userInfo = userInfo;
 		req.session.loggedIn = true;
+		res.json(utils.genRes(true, userInfo));
 	});
 });
 
@@ -31,8 +30,9 @@ Router.post("/signup", (req, res) => {
 });
 
 Router.get("/userInfo", (req, res) => {
+	console.log(req.session.id);
 	if (req.session.loggedIn)
-		res.json(utils.genRes(true, userInfo))
+		res.json(utils.genRes(true, req.session.userInfo));
 	else
 		res.json(utils.genRes(false, null, "Not logged in"));
 });
