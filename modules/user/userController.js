@@ -21,11 +21,12 @@ var signUp = (obj, cb)=> {
 
 var signIn = (email, password, cb) => {
 	var password = md5(password);
-	console.log(email);
-	firebase.database().ref('users').orderByChild("email").equalTo(email).on("child_added", (snapshot)=>{
-		var child = snapshot.key;
-		if (!child) return cb("Wrong email or password");
 
+	firebase.database().ref('users').orderByChild("email").equalTo(email).once("value").then(res=>{
+		var check = res.val();
+		if (!check) return cb("Wrong email or password");
+	firebase.database().ref('users').orderByChild("email").equalTo(email).once('child_added').then(res=>{
+		child = res.key;
 		firebase.database().ref(`users/${child}`).once('value')
 		.then(res => {
 			var arr=res.val();
@@ -42,7 +43,7 @@ var signIn = (email, password, cb) => {
 			else return cb("Wrong email or password");              
 		});
 	})
-}
+})
 
 module.exports = {signIn: signIn, signUp: signUp}
 
