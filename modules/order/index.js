@@ -51,4 +51,11 @@ Router.post('/editOrder', (req, res) => {
 	});
 });
 
+Router.post('/getOrder', (req, res) => {
+	orderController.getOrder(req.body.orderId, (err, data) => {
+		if (err) res.json(err);
+		else res.json(data);
+	});
+});
+
 module.exports = Router;

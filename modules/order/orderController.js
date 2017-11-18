@@ -66,4 +66,10 @@ var editOrder = (obj, cb)=> {
 	cb(null);
 }
 
-module.exports = {createOrder, deleteOrder, editOrder};
+var getOrder = (orderId, cb) => {
+	firebase.database().ref(`order/${orderId}`).once('value').then(res => {
+		cb(res.val());
+	});
+}
+
+module.exports = {createOrder, deleteOrder, editOrder, getOrder};
