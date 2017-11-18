@@ -7,6 +7,38 @@
     </div>
 
     <div class="col-md-8 col-md-offset-2">
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>STT</th>
+                <th>Tên khách hàng</th>
+                <th>Bàn số</th>
+                <th>Số tiền</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in $ctrl.bookingList">
+                <td>{{$index}}</td>
+                <td>{{item.name}}</td>
+                <td>
+                    <div ng-repeat="child in item.table">{{child.name}}</div>
+                </td>
+                <td>
+                    {{item.price}}
+                </td>
+                <td class="text-center">
+                    <button class="btn btn-primary" ng-bootbox-confirm="Bạn có chắc chắn?"
+                            ng-bootbox-confirm-action="$ctrl.approve(item)" ng-bootbox-confirm-action-cancel="">
+                        Approve
+                    </button>
 
+                    <a type="button" class="btn btn-danger" ng-bootbox-confirm="Bạn có chắc chắn?" ng-bootbox-confirm-action="$ctrl.cancel(item)" ng-bootbox-confirm-action-cancel="">Decline</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-bordered"></table>
     </div>
 </div>

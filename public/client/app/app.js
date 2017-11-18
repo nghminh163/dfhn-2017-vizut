@@ -18,7 +18,7 @@ import 'angular-ui-bootstrap';
 import 'ngbootbox';
 import 'moment/moment.js';
 import 'angular-bootstrap-lightbox/dist/angular-bootstrap-lightbox.min';
-
+import 'angularfire';
 import appSerivce from './app.service';
 
 angular.module('app', [
@@ -29,6 +29,7 @@ angular.module('app', [
     'ngSanitize',
     'ngBootbox',
     'bootstrapLightbox',
+    'firebase',
     uiRouter,
     Common,
     Components

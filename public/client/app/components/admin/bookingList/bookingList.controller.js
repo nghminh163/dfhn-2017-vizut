@@ -2,6 +2,7 @@ class BookingListController {
     constructor($rootScope, $window, $anchorScroll, bookingListService) {
         this.name = 'bookingList';
         this.$rootScope = $rootScope;
+        this.onInit();
     }
 
     onInit() {

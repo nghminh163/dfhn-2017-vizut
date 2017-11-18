@@ -19,7 +19,6 @@ class LoginController {
     loginForm() {
         this.loginService.login(this.formData, (res) => {
             if(res.status) {
-                console.log(res);
                 this.toastr.success("Login thành công");
                 this.$rootScope.user = res.result;
                 this.$cookieStore.put('user', this.$rootScope.user);
@@ -34,7 +33,6 @@ class LoginController {
     registerForm() {
         this.loginService.register(this.formData, (res) => {
             if(res.status) {
-                console.log(res);
                 this.toastr.success("Đăng ký thành công");
                 this.$rootScope.user = this.formData;
                 this.$cookieStore.put('user', this.$rootScope.user);

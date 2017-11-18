@@ -34,4 +34,14 @@
       text-align: center;
     }
   }
+
+  .list-menu {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    img {
+      width: 50px;
+      height: auto;
+    }
+  }
 }

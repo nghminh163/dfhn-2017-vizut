@@ -15,9 +15,22 @@
     <script src="/assets/js/jquery-ui.js"></script>
     <script src="/assets/js/moment.js"></script>
 
+
 </head>
 <body ng-app="app" ng-strict-di ng-cloak>
-
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+<script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyCZ6nJQB8QeU4iltI1WfLWTcsg6vcHq23Q",
+        authDomain: "dfhn-vizut.firebaseapp.com",
+        databaseURL: "https://dfhn-vizut.firebaseio.com",
+        projectId: "dfhn-vizut",
+        storageBucket: "dfhn-vizut.appspot.com",
+        messagingSenderId: "108571110238"
+    };
+    firebase.initializeApp(config);
+</script>
 <app></app>
 </body>
 

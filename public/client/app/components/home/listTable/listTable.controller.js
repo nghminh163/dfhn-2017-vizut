@@ -1,53 +1,34 @@
 class ListTableController {
-    constructor($rootScope, $window, $anchorScroll, listTableService) {
+    constructor($rootScope, $window, $anchorScroll, $firebaseArray, listTableService) {
         this.name = 'listTable';
         this.$rootScope = $rootScope;
-        this.onInit();
         this.filter = '';
-        this.activeTable = {}
-
-    }
-
-    onInit() {
-        this.listTable = [
-            {
-                status: 0,
-                name: '1',
-                orderId: null
-            },
-            {
-                status: 1,
-                name: '2',
-                orderId: 124
-            },
-            {
-                status: 0,
-                name: '3',
-                orderId: null
-            },
-            {
-                status: 2,
-                name: '4',
-                orderId: null
-            },
-            {
-                status: 0,
-                name: '5',
-                orderId: null
-            },
-            {
-                status: 0,
-                name: '6',
-                orderId: null
-            },
-            {
-                status: 0,
-                name: '7',
-                orderId: null
-            }
-        ];
+        this.activeTable = {};
+        this.$firebaseArray = $firebaseArray;
         this.selectedTable = [];
+
+        firebase.database().ref('table/').on('value', (res) => {
+            let arrays = Object.keys(res.val());
+            let ref = firebase.database().ref('table/');
+            this.listTable = this.$firebaseArray(ref);
+            console.log(this.listTable);
+
+            // setTimeout(() => {
+            //     this.listTable.forEach((item) => {
+            //         if (item.orderId === $rootScope.user.id) {
+            //             this.selectedTable.push(item);
+            //             item.isSelect = true;
+            //         }
+            //     });
+            //     console.log(this.listTable);
+            // }, 10);
+        });
     }
+
+    addNew() {
+
+    }
+
 
     selectTable(item) {
         if (!item.isSelect) {
@@ -59,19 +40,28 @@ class ListTableController {
             item.isSelect = false;
         }
     }
+
     showTableDetail(item) {
         this.activeTable = item;
         // $('#dismiss-modal').trigger('click');
     }
 
     continueToOrder() {
+        console.log('??');
         this.$rootScope.isOrder = true;
+        this.$rootScope.activeTable = this.activeTable;
+        console.log(this.$rootScope.activeTable);
         this.$rootScope.selectedTable = this.selectedTable;
+    }
+
+    deltaiOrder() {
+        console.log(this.$rootScope.user);
+        this.$rootScope.isOrder = true;
     }
 }
 
 ListTableController.$inject = [
-    '$rootScope', '$window', '$anchorScroll',
+    '$rootScope', '$window', '$anchorScroll', '$firebaseArray',
     'listTableService'
 ];
 

@@ -9,14 +9,13 @@ const utils = require('../utils');
 Router.post('/createOrder', (req, res) => {
 	var orderInfo = {
 		userId: req.body.userId,
-		tableIds: req.body.tableIds,
 		description: req.body.description,
 		price: req.body.price,
 		time: req.body.time,
 		tableIds:  req.body.tableIds,
 		listing: req.body.listing,
 		status: "pending"
-	}
+	};
 
 	orderController.createOrder(orderInfo, (err, data) => {
 		if (err) res.json(utils.genRes(false, null, err));
