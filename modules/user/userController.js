@@ -9,13 +9,13 @@ firebase.initializeApp({
 });
 
 var signUp = (obj, cb)=> {
-	firebase.database().ref('users').push({
+	var objs = {
 		name: obj.name,
 		password: md5(obj.password),
 		phone: obj.phone,
 		email: obj.email
-	});
-	var objs= {name: obj.name, phone: obj.phone, email=obj.email}
+	}
+	firebase.database().ref('users').push(objs);
 	cb(null,objs);
 }
 
