@@ -1,7 +1,11 @@
 var table=(tableIds, orderId)=>{
-    for (var i=0; i<tableIds.length;i++){
-        firebase.database().ref(`table/${table}`).set({orderId:orderId, status:1});
-    }
-}
-
-module.exports={table}
+    let postData = {}
+    tableIds.forEach(ids =>{
+        postData[ids] = {status: "1", orderId: orderId}
+    })
+  var updates = {};
+    updates['/table'] = postData;
+  firebase.database().ref().update(updates);
+  }
+  
+  module.exports={table}

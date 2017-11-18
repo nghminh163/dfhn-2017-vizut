@@ -15,7 +15,8 @@ var signUp = (obj, cb)=> {
 		phone: obj.phone,
 		email: obj.email
 	});
-	cb(null);
+	var objs= {name: obj.name, phone: obj.phone, email=obj.email}
+	cb(null,objs);
 }
 
 var signIn = (email, password, cb) => {
