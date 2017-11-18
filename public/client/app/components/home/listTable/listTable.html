@@ -2,7 +2,6 @@
     <div class="tool-filter ">
         <h1>{{ $ctrl.name }}</h1>
         <div ng-if="$ctrl.$rootScope.user.role !== 'admin'">
-            <p>SDA</p>
             <button class="btn btn-primary" ng-if="$ctrl.$rootScope.user.order" ng-click="$ctrl.deltaiOrder()">Xem thông tin đơn hàng</button>
         </div>
         <div ng-if="$ctrl.$rootScope.user.role === 'admin'">
