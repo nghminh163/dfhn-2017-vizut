@@ -1,0 +1,34 @@
+<div class="list-table-wrapper">
+
+    <div class="tool-filter ">
+        <h1>{{ $ctrl.name }}</h1>
+
+        <div class="order-list">
+            <label for="filter-form">Xem theo:</label>
+            <select id="filter-form" class="form-control" ng-model="$ctrl.filter">
+                <option value="">Tất cả</option>
+                <option value="0">Các bàn chưa có người đặt</option>
+                <option value="1">Bàn đã có người đặt</option>
+                <option value="2">Bàn đã có người đặt và thanh toán</option>
+            </select>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-4" ng-repeat="item in $ctrl.listTable | tableFilter: $ctrl.filter">
+            <div class="item-table">
+                <div class="status-icon">
+                    <i tooltip-placement="top" uib-tooltip="Chưa có ai đặt" class="fa fa-unlock-alt" aria-hidden="true" ng-if="item.status === 0"></i>
+                    <i tooltip-placement="top" uib-tooltip="Đã có người đặt" class="fa fa-key" aria-hidden="true" ng-if="item.status === 1"></i>
+                    <i tooltip-placement="top" uib-tooltip="Đã đặt và thanh toán" class="fa fa-lock" aria-hidden="true" ng-if="item.status === 2"></i>
+                </div>
+
+                <h3 class="title">Bàn số {{item.name}}</h3>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+

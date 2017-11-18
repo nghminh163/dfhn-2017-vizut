@@ -1,0 +1,10 @@
+<!-- Place all UI elements intended to be present across all routes in this file -->
+<div class="app">
+    <div ui-view>
+        <login ng-if="$ctrl.isLogin"></login>
+        <div ng-if="!$ctrl.isLogin">
+            <admin ng-if="$ctrl.role === 'admin'"></admin>
+            <home ng-if="$ctrl.role === 'user'"></home>
+        </div>
+    </div>
+</div>
