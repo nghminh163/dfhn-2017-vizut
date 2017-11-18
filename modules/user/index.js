@@ -9,13 +9,13 @@ Router.post("/login", (req, res) => {
 	var password = req.body.password;
 	res.json({
 		role: "user",
-		id: "123",
+		userId: "123",
 		name: "Test"
 	});
 });
 
 Router.get("/userInfo", (req, res) => {
-	
+
 });
 
 
