@@ -1,27 +1,28 @@
 <div class="list-table-wrapper">
-
     <div class="tool-filter ">
         <h1>{{ $ctrl.name }}</h1>
-
+        <button class="btn btn-primary" ng-if="$ctrl.selectedTable.length > 0" ng-click="$ctrl.continueToOrder()">Tiếp tục đặt bàn</button>
         <div class="order-list">
             <label for="filter-form">Xem theo:</label>
             <select id="filter-form" class="form-control" ng-model="$ctrl.filter">
                 <option value="">Tất cả</option>
                 <option value="0">Các bàn chưa có người đặt</option>
                 <option value="1">Bàn đã có người đặt</option>
-                <option value="2">Bàn đã có người đặt và thanh toán</option>
             </select>
         </div>
 
     </div>
 
     <div class="row">
-        <div class="col-md-4" ng-repeat="item in $ctrl.listTable | tableFilter: $ctrl.filter">
-            <div class="item-table">
+        <div class="col-md-4"
+             ng-repeat="item in $ctrl.listTable | tableFilter: $ctrl.filter" data-toggle="modal"
+             data-target="#detailModal" ng-click="$ctrl.showTableDetail(item)">
+            <div class="item-table" ng-class="{'bg-primary': item.isSelect}">
                 <div class="status-icon">
-                    <i tooltip-placement="top" uib-tooltip="Chưa có ai đặt" class="fa fa-unlock-alt" aria-hidden="true" ng-if="item.status === 0"></i>
-                    <i tooltip-placement="top" uib-tooltip="Đã có người đặt" class="fa fa-key" aria-hidden="true" ng-if="item.status === 1"></i>
-                    <i tooltip-placement="top" uib-tooltip="Đã đặt và thanh toán" class="fa fa-lock" aria-hidden="true" ng-if="item.status === 2"></i>
+                    <i tooltip-placement="top" uib-tooltip="Chưa có ai đặt" class="fa fa-unlock-alt" aria-hidden="true"
+                       ng-if="item.status === 0"></i>
+                    <i tooltip-placement="top" uib-tooltip="Đã có người đặt" class="fa fa-key" aria-hidden="true"
+                       ng-if="item.status !== 0"></i>
                 </div>
 
                 <h3 class="title">Bàn số {{item.name}}</h3>
@@ -32,3 +33,30 @@
     </div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Thông tin chi tiết</h4>
+            </div>
+            <div class="modal-body">
+                <div class="">Bàn số {{$ctrl.activeTable.name}}</div>
+                <div class="">Số ghế ngồi: {{$ctrl.activeTable.numberOfSeat}}</div>
+                <div class="status-table">Trạng thái:
+                    <div class="status" ng-if="$ctrl.activeTable.status !== 0"> đã có người đặt</div>
+                    <div class="status" ng-if="$ctrl.activeTable.status === 0"> còn trống</div>
+                </div>
+                <div class="">Description: {{$ctrl.activeTable.description}}</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="dismiss-modal" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="$ctrl.selectTable($ctrl.activeTable)"
+                        ng-if="$ctrl.activeTable.status === 0">Đặt bàn này
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

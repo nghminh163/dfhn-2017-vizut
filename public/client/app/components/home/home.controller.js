@@ -1,7 +1,7 @@
 class HomeController {
     constructor($rootScope, $window, $anchorScroll, homeService) {
         this.name = 'home';
-        console.log('????');
+        this.$rootScope = $rootScope;
     }
 }
 

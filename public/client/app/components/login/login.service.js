@@ -3,7 +3,7 @@ let loginService = ($http) => {
     const bastApi = 'http://localhost:3003';
     return {
         login: (data, callback) => {
-            let apiUrl = bastApi + '/login';
+            let apiUrl = bastApi + '/api/user/login';
             $http({
                 method: 'POST',
                 data: data,

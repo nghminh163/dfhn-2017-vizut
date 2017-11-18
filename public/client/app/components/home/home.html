@@ -1,4 +1,5 @@
 <navbar></navbar>
 <div class="container">
-    <list-table></list-table>
+    <list-table ng-if="!$ctrl.$rootScope.isOrder"></list-table>
+    <order-form ng-if="$ctrl.$rootScope.isOrder"></order-form>
 </div>
