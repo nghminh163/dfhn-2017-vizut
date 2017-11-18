@@ -41,6 +41,9 @@ var editOrder = (obj, cb)=> {
 	if(obj.tableIds) {
 		updated.tableIds = obj.tableIds;
 		tableController.updateTable(obj.tableIds, obj.orderId, 1, (err, data) => {});
+		firebase.database().ref('order/'+obj.orderId+'/tableIds').once('value').then(res=>{var tblIds=res.val()
+			tableController.updateTable(tblIds, obj.orderId, 0)
+		})
 	}
 	if(obj.listing) updated.listing = obj.listing;	
 
