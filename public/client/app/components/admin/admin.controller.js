@@ -1,6 +1,8 @@
 class AdminController {
     constructor($rootScope, $window, $anchorScroll) {
         this.name = 'admin';
+        this.$rootScope = $rootScope;
+        $rootScope.activeView = 'list';
     }
 }
 

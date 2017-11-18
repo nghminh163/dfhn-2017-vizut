@@ -17,15 +17,31 @@ class LoginController {
     }
 
     loginForm() {
-        this.toastr.success("Login thành công");
         this.loginService.login(this.formData, (res) => {
-
             if(res.status) {
                 console.log(res);
                 this.toastr.success("Login thành công");
                 this.$rootScope.user = res.result;
                 this.$cookieStore.put('user', this.$rootScope.user);
                 this.$window.location.reload();
+            }
+            else {
+                this.toastr.error(res.message);
+            }
+        })
+    }
+
+    registerForm() {
+        this.loginService.register(this.formData, (res) => {
+            if(res.status) {
+                console.log(res);
+                this.toastr.success("Đăng ký thành công");
+                this.$rootScope.user = this.formData;
+                this.$cookieStore.put('user', this.$rootScope.user);
+                this.$window.location.reload();
+            }
+            else {
+                this.toastr.error(res.message);
             }
         })
     }

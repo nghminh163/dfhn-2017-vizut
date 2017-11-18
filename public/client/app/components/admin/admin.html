@@ -1,3 +1,10 @@
-<div>
-  <h1>Admin view</h1>
+<navbar></navbar>
+<div class="container" ng-if="$ctrl.$rootScope.activeView === 'list'">
+    <button class="btn btn-default" ng-click="$ctrl.$rootScope.activeView = 'booking-list'">Danh sách yêu cầu đặt bàn</button>
+    <button class="btn btn-default" ng-click="$ctrl.$rootScope.activeView = 'history'">Xem lịch sử đặt bàn</button>
+    <list-table></list-table>
+</div>
+
+<div class="container" ng-if="$ctrl.$rootScope.activeView === 'booking-list'">
+    <booking-list></booking-list>
 </div>

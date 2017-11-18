@@ -14,11 +14,21 @@ let listTableModule = angular.module('listTable', [
                 case  '': {
                     return items;
                 }
+                case  '0': {
+                    let newItem = [];
+                    for (var i = 0; i < items.length; i++) {
+                        var item = items[i];
+                        if (item.status == 0) {
+                            newItem.push(item);
+                        }
+                    }
+                    return newItem;
+                }
                 default: {
                     let newItem = [];
                     for (var i = 0; i < items.length; i++) {
                         var item = items[i];
-                        if (item.status == filter) {
+                        if (item.status == 1 || item.status == 2) {
                             newItem.push(item);
                         }
                     }
