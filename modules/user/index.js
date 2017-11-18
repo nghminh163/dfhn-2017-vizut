@@ -5,17 +5,20 @@ const md5 = require('md5');
 const userController = require('./userController.js');
 
 Router.post("/login", (req, res) => {
-	var email = req.body.email;
-	var password = req.body.password;
-	res.json({
-		role: "user",
-		userId: "123",
-		name: "Test"
-	});
+    var email = req.body.email;
+    var password = req.body.password;
+    res.json({
+        status: true,
+        result: {
+            role: "user",
+            id: "123",
+            name: "Test"
+        }
+    });
 });
 
 Router.get("/userInfo", (req, res) => {
-
+	
 });
 
 
