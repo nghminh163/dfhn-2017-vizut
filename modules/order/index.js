@@ -2,7 +2,7 @@ const express = require('express');
 const Router = express.Router();
 const bodyParser = require('body-parser');
 const orderController = require('./orderController.js');
-const tableController = require('../table');
+const tableController = require('../table/tableController.js');
 const async = require('async');
 const utils = require('../utils');
 

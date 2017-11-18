@@ -1,17 +1,15 @@
-var updateTable = (tableIds, orderId, status, cb) => {
-	let postData = {};
+const firebase = require('firebase-admin');
 
+var updateTable = (tableIds, orderId, status, cb) => {
+	var updates = {};
 	tableIds.forEach(ids => {
-		postData[ids] = {
+		updates[`/table/${ids}`] =  {
 			status: status,
 			orderId: orderId
-		}
+		};
 	});
-	
-	var updates = {};
-	updates['/table'] = postData;
 	firebase.database().ref().update(updates);
 	cb(null);
 }
 	
-module.exports={table}
+module.exports={updateTable: updateTable}
