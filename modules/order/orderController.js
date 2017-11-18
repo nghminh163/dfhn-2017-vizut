@@ -9,7 +9,7 @@ var createOrder = (obj, cb)=> {
 			time: time,
 			tableIds:  tableIds,
 			status: "pending"
-	}).key);
+	}).key); 
 }
 
 module.exports = {createOrder};
