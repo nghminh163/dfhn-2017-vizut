@@ -1,6 +1,7 @@
 //Thêm, sửa, xóa
 //idor, id users, idtable, description, price, person, time
 const firebase = require("firebase-admin");
+const tableController = require("../table/tableController.js");
 
 var serviceAccount = require("../../dfhn-vizut-firebase-adminsdk-7b9v6-6b7890226b.json");
 
@@ -38,7 +39,10 @@ var editOrder = (obj, cb)=> {
 
 	if(obj.description)	updated.description = obj.description;
 	if(obj.price)	updated.price = obj.price;
-	if(obj.tableIds) updated.tableIds = obj.tableIds;
+	if(obj.tableIds) {
+		updated.tableIds = obj.tableIds;
+		tableController.updateTable(obj.tableIds, obj.orderId, 1, (err, data) => {});
+	}
 	if(obj.listing) updated.listing = obj.listing;	
 
 	firebase.database().ref(`order/${obj.orderId}`).update(updated);
