@@ -23,11 +23,17 @@ var createOrder = (obj, cb)=> {
 }
 
 var deleteOrder = (orderId, cb)=>{
-	firebase.database().ref(`order/${orderId}`).remove();
-	firebase.database().ref('table').orderByChild("orderId").equalTo(orderId).once("child_added").then(res=> {
-		let child = res.key;
-		firebase.database().ref(`table/${child}/orderId`).remove(); 
-		firebase.database().ref(`table/${child}`).set({status: 0}); 
+	var updated = {
+	}
+
+	firebase.database().ref(`order/${orderId}/tableIds`).once('value').then(res=>{
+		var tblIds=res.val();
+		tblIds.forEach(id => {
+			updated[`table/${id}/orderId`] = null;
+			updated[`table/${id}/status`] = 0;
+		});
+		firebase.database().ref().update(updated);
+		firebase.database().ref(`order/${orderId}`).remove();
 	});
 	cb(null);
 }
@@ -36,18 +42,27 @@ var editOrder = (obj, cb)=> {
 	var updated = {
 	}
 
-	if(obj.description)	updated.description = obj.description;
-	if(obj.price)	updated.price = obj.price;
+	if(obj.description)	updated[`order/${obj.orderId}/description`] = obj.description;
+	if(obj.price)	updated[`order/${obj.orderId}/price`] = obj.price;
+	if(obj.listing) updated.listing = obj.listing;
 	if(obj.tableIds) {
-		updated.tableIds = obj.tableIds;
-		tableController.updateTable(obj.tableIds, obj.orderId, 1, (err, data) => {});
-		firebase.database().ref('order/'+obj.orderId+'/tableIds').once('value').then(res=>{var tblIds=res.val()
-			tableController.updateTable(tblIds, obj.orderId, 0)
-		})
+		obj.tableIds.forEach(id => {
+			updated[`table/${id}/orderId`] = obj.orderId;
+			updated[`table/${id}/status`] = 1;
+		});
+		updated[`order/${obj.orderId}/tableIds`] = obj.tableIds;
+		firebase.database().ref('order/'+obj.orderId+'/tableIds').once('value').then(res=>{
+			var tblIds=res.val();
+			let updated2 = {};
+			tblIds.forEach(id => {
+				updated2[`table/${id}/orderId`] = null;
+				updated2[`table/${id}/status`] = 0;
+			});
+			firebase.database().ref().update(updated2).then(() => {
+				firebase.database().ref().update(updated);
+			});
+		});
 	}
-	if(obj.listing) updated.listing = obj.listing;	
-
-	firebase.database().ref(`order/${obj.orderId}`).update(updated);
 	cb(null);
 }
 
